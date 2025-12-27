@@ -11,7 +11,9 @@ export interface GameState {
   currentGuess: string;
   gameStatus: 'playing' | 'won' | 'lost';
   invalidGuess: boolean;
+  selectedDate: Date | null;
   setMode: (mode: 'daily' | 'infinite') => void;
+  setDate: (date: Date) => void;
   addLetter: (letter: string) => void;
   removeLetter: () => void;
   submitGuess: () => void;
@@ -25,10 +27,23 @@ export const useGameStore = create<GameState>((set, get) => ({
   currentGuess: '',
   gameStatus: 'playing',
   invalidGuess: false,
+  selectedDate: null,
 
   setMode: (mode) => {
     const targetWord = mode === 'daily' ? getDailyWord() : getRandomWord();
-    set({ mode, targetWord, guesses: [], currentGuess: '', gameStatus: 'playing' });
+    set({
+      mode,
+      targetWord,
+      guesses: [],
+      currentGuess: '',
+      gameStatus: 'playing',
+      selectedDate: null,
+    });
+  },
+
+  setDate: (date) => {
+    const targetWord = getDailyWord(date);
+    set({ selectedDate: date, targetWord, guesses: [], currentGuess: '', gameStatus: 'playing' });
   },
 
   addLetter: (letter) => {
@@ -64,8 +79,8 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   resetGame: () => {
-    const { mode } = get();
-    const targetWord = mode === 'daily' ? getDailyWord() : getRandomWord();
+    const { mode, selectedDate } = get();
+    const targetWord = mode === 'daily' ? getDailyWord(selectedDate || undefined) : getRandomWord();
     set({ targetWord, guesses: [], currentGuess: '', gameStatus: 'playing' });
   },
 }));

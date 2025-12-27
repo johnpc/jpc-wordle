@@ -11,10 +11,15 @@ export const seededRandom = (seed: number): number => {
   return x - Math.floor(x);
 };
 
-export const getDailyWord = (): string => {
-  const seed = getDateSeed();
+export const getDailyWord = (date?: Date): string => {
+  const seed = date ? getDateSeedForDate(date) : getDateSeed();
   const index = Math.floor(seededRandom(seed) * WORDS.length);
   return WORDS[index];
+};
+
+export const getDateSeedForDate = (date: Date): number => {
+  const start = new Date(2025, 0, 1);
+  return Math.floor((date.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 };
 
 export const getRandomWord = (): string => {
