@@ -1,4 +1,4 @@
-import { WORDS } from './words';
+import { ANSWERS } from './words';
 
 export const getDateSeed = (): number => {
   const today = new Date();
@@ -13,8 +13,8 @@ export const seededRandom = (seed: number): number => {
 
 export const getDailyWord = (date?: Date): string => {
   const seed = date ? getDateSeedForDate(date) : getDateSeed();
-  const index = Math.floor(seededRandom(seed) * WORDS.length);
-  return WORDS[index];
+  const index = Math.floor(seededRandom(seed) * ANSWERS.length);
+  return ANSWERS[index];
 };
 
 export const getDateSeedForDate = (date: Date): number => {
@@ -23,5 +23,5 @@ export const getDateSeedForDate = (date: Date): number => {
 };
 
 export const getRandomWord = (): string => {
-  return WORDS[Math.floor(Math.random() * WORDS.length)];
+  return ANSWERS[Math.floor(Math.random() * ANSWERS.length)];
 };

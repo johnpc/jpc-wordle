@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { getDailyWord, getRandomWord } from './utils';
-import { WORDS } from './words';
+import { VALID_GUESSES } from './words';
 
 export type LetterStatus = 'correct' | 'present' | 'absent' | 'empty';
 
@@ -61,7 +61,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { currentGuess, guesses, targetWord, gameStatus } = get();
     if (gameStatus !== 'playing' || currentGuess.length !== 5) return;
 
-    if (!WORDS.includes(currentGuess)) {
+    if (!VALID_GUESSES.has(currentGuess)) {
       set({ invalidGuess: true });
       setTimeout(() => set({ invalidGuess: false }), 500);
       return;
