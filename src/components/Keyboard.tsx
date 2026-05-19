@@ -52,8 +52,9 @@ export const Keyboard = () => {
                 className={cn(
                   'px-3 py-4 rounded font-bold transition-colors',
                   (key === 'ENTER' || key === '⌫') && 'px-5',
-                  status === 'unused' && 'bg-gray-300 hover:bg-gray-400',
-                  status === 'absent' && 'bg-gray-500 text-white',
+                  status === 'unused' &&
+                    'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 dark:text-white',
+                  status === 'absent' && 'bg-gray-500 dark:bg-gray-700 text-white',
                   status === 'present' && 'bg-yellow-500 text-white',
                   status === 'correct' && 'bg-green-500 text-white'
                 )}
