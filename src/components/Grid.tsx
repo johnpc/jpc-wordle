@@ -11,8 +11,9 @@ export const Tile = ({ letter, status }: TileProps) => {
     <div
       className={cn(
         'w-14 h-14 border-2 flex items-center justify-center text-2xl font-bold uppercase',
-        status === 'empty' && 'border-gray-300',
-        status === 'absent' && 'bg-gray-400 border-gray-400 text-white',
+        status === 'empty' && 'border-gray-300 dark:border-gray-600',
+        status === 'absent' &&
+          'bg-gray-400 dark:bg-gray-600 border-gray-400 dark:border-gray-600 text-white',
         status === 'present' && 'bg-yellow-500 border-yellow-500 text-white',
         status === 'correct' && 'bg-green-500 border-green-500 text-white'
       )}

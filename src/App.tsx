@@ -3,6 +3,7 @@ import { useGameStore } from './store';
 import { Grid } from './components/Grid';
 import { Keyboard } from './components/Keyboard';
 import { Button } from './components/Button';
+import { DarkModeToggle } from './components/DarkModeToggle';
 
 function App() {
   const {
@@ -34,9 +35,14 @@ function App() {
   }, [gameStatus, addLetter, removeLetter, submitGuess]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col items-center p-4 transition-colors">
       <header className="w-full max-w-lg mb-8">
-        <h1 className="text-4xl font-bold text-center mb-4">Wordle</h1>
+        <div className="flex items-center justify-center relative mb-4">
+          <h1 className="text-4xl font-bold text-center">Wordle</h1>
+          <div className="absolute right-0">
+            <DarkModeToggle />
+          </div>
+        </div>
         <div className="flex gap-2 justify-center mb-4">
           <Button
             variant={mode === 'daily' ? 'default' : 'outline'}
@@ -61,7 +67,7 @@ function App() {
                   : new Date().toISOString().split('T')[0]
               }
               onChange={(e) => setDate(new Date(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
           </div>
         )}
